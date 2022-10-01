@@ -2,9 +2,11 @@ package LikeLionPrac01.prac01.post.dto;
 
 import LikeLionPrac01.prac01.post.domain.Board;
 import lombok.Builder;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+@Getter
 public class BoardDto {
 
     private Long id;
@@ -33,7 +35,7 @@ public class BoardDto {
     }
 
     @Builder
-    public BoardDto(String name, Integer age, String major, String contents, LocalDateTime createdTime, LocalDateTime modifiedTime){
+    public BoardDto(Long id, String name, Integer age, String major, String contents, LocalDateTime createdTime, LocalDateTime modifiedTime){
         this.id=id;
         this.name = name;
         this.age = age;
