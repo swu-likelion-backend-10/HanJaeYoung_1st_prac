@@ -1,5 +1,6 @@
 package LikeLionPrac01.prac01.post.controller;
 
+import LikeLionPrac01.prac01.post.domain.Board;
 import LikeLionPrac01.prac01.post.dto.BoardDto;
 import LikeLionPrac01.prac01.post.service.BoardService;
 import org.springframework.stereotype.Controller;
@@ -62,5 +63,13 @@ public class BoardController {
         boardService.deletePost(id);
         return "redirect:/";
     }
+
+    @GetMapping("/board/search")
+    public String search(@RequestParam(value="keyword") String keyword, Model model) {
+        List<BoardDto> boardDtoList = boardService.searchPosts(keyword);
+        model.addAttribute("boardList", boardDtoList);
+        return "board/list.html";
+    }
+
 
 }

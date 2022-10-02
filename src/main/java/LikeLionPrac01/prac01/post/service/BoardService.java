@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BoardService {
@@ -18,6 +19,39 @@ public class BoardService {
     public BoardService(BoardRepository boardRepository){
         this.boardRepository = boardRepository;
     }
+
+
+
+    @Transactional
+    public List<BoardDto> searchPosts(String keyword) {
+        List<Board> boards = boardRepository.findByNameContaining(keyword);
+        List<BoardDto> boardDtoList = new ArrayList<>();
+
+        if (boards.isEmpty()) return boardDtoList;
+
+        for (Board board : boards) {
+            boardDtoList.add(this.convertEntityToDto(board));
+        }
+
+        return boardDtoList;
+    }
+
+    private BoardDto convertEntityToDto(Board board) {
+        return BoardDto.builder()
+                .id(board.getId())
+                .name(board.getName())
+                .contents(board.getContents())
+                .createdTime(board.getCreatedTime())
+                .build();
+    }
+
+
+
+
+
+
+
+
 
     @Transactional
     public Long savePost(BoardDto boardDto){
@@ -74,4 +108,10 @@ public class BoardService {
     public void deletePost(Long id){
         boardRepository.deleteById(id);
     }
+
+
+
+
+
+
 }

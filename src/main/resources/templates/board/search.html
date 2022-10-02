@@ -2,20 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>메인 화면</title>
+    <title>검색 결과</title>
 </head>
 <body>
-<!-- 검색 form -->
-<form action="/board/search" method="GET">
-    <div>
-        <input name="keyword" type="text" placeholder="검색어를 입력해주세요">
-        <button>검색하기</button>
-    </div>
-
-
-</form>
-
-<a th:href="@{/post}">글쓰기</a>
+<div>
+    <form action="/post/search" method="GET" class="form-inline p-2 bd-highlight" role="search">
+        <input type="text" name="keyword" class="form-control" id="search" placeholder="검색어를 입력하세요">
+        <button class="btn btn-success bi bi-search"></button>
+    </form>
+</div>
 
 <table>
     <thead>
@@ -28,7 +23,7 @@
 
     <tbody>
     <!--CONTENTS!-->
-    <tr th:each="board : ${boardList}">
+    <tr th:each="board : ${searchList}">
         <td>
             <span th:text="${board.id}"></span>
         </td>

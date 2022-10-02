@@ -44,4 +44,5 @@ public class BoardDto {
         this.createdTime = createdTime;
         this.modifiedTime = modifiedTime;
     }
+
 }
